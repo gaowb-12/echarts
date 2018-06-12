@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html style="display: block;">
+	<head>
+		<meta charset="UTF-8">
+		<title>教学数据分析</title>
+		<link rel="stylesheet" type="text/css" href="css/base.css"/>
+		<style type="text/css">
+		/*classes*/
+		.classes_info { padding: 20px; }
+		.classes_info .classes_pic img { border: 1px solid #d9d9d9; }
+		.classes_info .classes_time { margin-left: 20px; font-size: 14px; }
+		.classes_info .classes_time p:first-child{margin-bottom: 12px;}
+		.classes_info .classes_time p:last-child{color:rgb(25, 133, 89);}
+		.classes_info .classes_time p:last-child span{font-size:28px;}
+		.classes_info .classes_place{font-size:14px;}
+		.classes_info .classes_place span{font-size:20px;color:rgb(25, 133, 89);}
+		.classes_info .classes_place i{margin-top:-2px;display: inline-block;background:rgb(25, 133, 89);width:5px;height:5px;border-radius:50%;margin-right:5px;}
+		/*classes_use*/
+		.classes_use .classes_user_title { background: #f1f5f4; height: 36px; line-height: 36px; color: #555; font-size: 16px; font-weight: bold; padding-left: 20px; }
+		.classes_use .classes_user_panel { background: #f1f5f4; padding: 20px 40px; box-shadow: inset 0 5px 5px #dee2e1; }
+		.classes_use .classes_user_panel dl { float: left; width: 25%; text-align: center; font-size: 12px; }
+		.classes_use .classes_user_panel dl dd { margin-top: 20px; font-size: 18px; }
+		/*学习时间、资源分享榜*/
+		.rank_charts .rank_one { background: #fff; box-shadow: 0 0 10px 5px #e9e9e9; border-radius: 20px; width: 46%; margin: 20px 2%; padding: 20px; box-sizing: border-box; }
+		.rank_charts .rank_one .rank_title { font-size: 16px; }
+		#study_left, #study_right,#use_left, #use_right { min-height: 480px; margin-top: -30px; width:100%;}
+		</style>
+	</head>
+	<body>
+		<!--学校名称-->
+		<div class="classes_info clearfix">
+			<div class="classes_pic fl"><img src="images/pic1.jpg"/></div>
+			<div class="classes_time fl">
+				<p>累计学习时间</p>
+				<p><span class="classes_time_num">100</span> 小时</p>
+			</div>
+			<!-- <div class="classes_place fr">
+				<p><i></i>本日学习时长<span>20</span>分钟，排名本班<span>11</span>位，全校第<span>189</span>位</p>
+				<p><i></i>比前一天学习时长增长<span>120</span>分钟</p>
+			</div> -->
+		</div>
+		<!--本班使用情况-->
+		<div class="classes_use">
+			<div class="classes_user_panel clearfix">
+				<dl>
+					<dt>累计阅读教材数</dt>
+					<dd><span>12</span>本</dd>
+				</dl>
+				<dl>
+					<dt>累计阅读时长</dt>
+					<dd><span>300</span>分钟</dd>
+				</dl>
+				<dl>
+					<dt>累计学习学科数</dt>
+					<dd><span>12</span>学科</dd>
+				</dl>
+				<dl>
+					<dt>累计分享资源数</dt>
+					<dd><span>11</span>条</dd>
+				</dl>
+			</div>
+		</div>
+		<!--学习时间、登录次数-->
+		<div class="rank_charts clearfix">
+			<div class="rank_one fl">
+				<div class="rank_title">学习时间（小时）</div>
+				<div id="study_left"></div>
+			</div>
+			<div class="rank_one fr">
+				<div class="rank_title">登录次数（24小时）</div>
+				<div id="study_right"></div>
+			</div>
+		</div>
+		<!--教材使用情况、资源分享情况-->
+		<div class="rank_charts clearfix">
+			<div class="rank_one fl">
+				<div class="rank_title">教材使用情况</div>
+				<div id="use_left"></div>
+			</div>
+			<div class="rank_one fr">
+				<div class="rank_title">资源分享情况</div>
+				<div id="use_right"></div>
+			</div>
+		</div>
+
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/infographic.js"></script>
+		<script>
+			var userList;
+			$.ajax({
+				url:"./js/class.json",
+				type:"get",
+				async:false,
+				success:function(data){
+					userList=data;
+				}
+			});
+		</script>
+		<script src="js/echarts_data.js"></script>
+	</body>
+</html>
